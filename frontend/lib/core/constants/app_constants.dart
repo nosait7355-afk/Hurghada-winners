@@ -1,16 +1,14 @@
-/// بيانات فرع من فروع الأكاديمية (اسم + وصف + رابط خرائط جوجل).
-/// كل فرع هو سجل أكاديمية (Academy) مستقل بالكامل في الباك إند — لذلك لكل
-/// فرع academyId خاص به يُستخدم عند إرسال طلب انضمام لاعب جديد لهذا الفرع.
+/// بيانات فرع من فروع الأكاديمية (اسم عربي + اسم إنجليزي).
+/// كل فرع هو سجل أكاديمية (Academy) مستقل في الباك إند — academyId هو اللي
+/// بيحدد الفرع اللي يتسجل فيه طلب انضمام اللاعب.
 class BranchInfo {
   final String name;
-  final String description;
-  final String mapsUrl;
+  final String nameEn;
   final String academyId;
 
   const BranchInfo({
     required this.name,
-    required this.description,
-    required this.mapsUrl,
+    required this.nameEn,
     required this.academyId,
   });
 }
@@ -87,57 +85,31 @@ class AppConstants {
       'رقم الهاتف:\n'
       '....................';
 
-  // ── فروع وملاعب الأكاديمية (تظهر في شاشة "الفروع") ──
+  // رقم واتساب الأكاديمية — زر "تواصل معنا" في شاشة الترحيب.
+  static const String academyWhatsappNumber = '+201111835595';
+
+  // ── فروع الأكاديمية (تظهر في شاشة "الفروع" وفي طلب انضمام اللاعب) ──
+  // academyId = سجل الأكاديمية في قاعدة tennis_academy — لا تغيّره مع الاسم.
   static const List<BranchInfo> branches = [
     BranchInfo(
-      name: 'فرع مدينة الشروق',
-      description:
-          'ملعب الحريف 1 - الجراش - خلف بنك القاهرة - والمدرسة اليابانية',
-      mapsUrl: 'https://maps.google.com/?q=30.157984,31.621401',
-      academyId: '6a73d579c94b86f12268179a',
-    ),
-    // تحذير: academyId هو ما يحدّد الأكاديمية التي يُسجَّل فيها اللاعب فعلياً
-    // — لا الاسم. عند تغيير أي اسم هنا لا تغيّر معه الـ academyId المرافق،
-    // وإلا ذهب المسجَّلون إلى الفرع الخطأ.
-    BranchInfo(
-      name: 'فرع المخابرات',
-      description: 'مدينة بدر - ملعب المخابرات',
-      mapsUrl: 'https://maps.google.com/?q=Mokhabarat+Badr',
-      academyId: '6a73d53dc94b86f12268178e',
+      name: 'نادى الغردقة الرياضى',
+      nameEn: 'Hurghada Sporting Club',
+      academyId: '6aedd7db5ed894e2beec0a5b',
     ),
     BranchInfo(
-      name: 'فرع النرجس',
-      description: 'مدينة بدر - ملعب النرجس',
-      mapsUrl: 'https://maps.google.com/?q=Narges+Badr',
-      academyId: '6a73d524c94b86f122681788',
+      name: 'فندق سندباد',
+      nameEn: 'Sindbad Hotel',
+      academyId: '6aedd7db5ed894e2beec0a61',
     ),
     BranchInfo(
-      name: 'فرع زهرة العاصمة',
-      description: 'المجمع الرياضي',
-      mapsUrl: 'https://maps.google.com/?q=Sports+Complex+Capital',
-      academyId: '6a73d561c94b86f122681794',
+      name: 'فندق الكونتينتال',
+      nameEn: 'Continental Hotel',
+      academyId: '6aedd7db5ed894e2beec0a64',
+    ),
+    BranchInfo(
+      name: 'مدرسة رجاك',
+      nameEn: 'Rajac School',
+      academyId: '6aedd7dc5ed894e2beec0a67',
     ),
   ];
-
-  // ── نبذة عن الأكاديمية ──
-  static const String aboutAcademyText =
-      'Hurghada Winners Tennis academy\n'
-      'اكاديمية Tennis لتأسيس وتطوير لاعبي Tennis للبراعم والناشئين\n\n'
-      'بنقبل من اول ٣ سنين ( اولاد - بنات )\n\n'
-      'مش بس اكاديمية تعليمية احنا كمان بنعتمد علي بناء وتطوير شخصية الولد '
-      'ليكون قادر علي الاعتماد علي نفسه\n\n'
-      'مرخصة من قبل الاتحاد المصري لكرة القدم ووزارة الشباب والرياضة\n\n'
-      'مجموعة من المدربين المؤهلين والمتخصصين في مجال Tennis والحاصلين '
-      'علي الشهادات والدورات التدريبية المعتمدة من الاتحاد المصري والاتحاد الافريقي\n\n'
-      'كمان بنسوق اللعيبة في افضل واكبر الاندية زي ( الاهلي ، انبي ، المقاولين ، '
-      'النصر وغيرها من الاندية )\n\n'
-      'بنطور ابنك من جميع الجوانب البدنية والمهارية والخططية\n'
-      'والتطور دا بيكون ملحوظ علي ابنك في خلال ٣ شهور باذن الله\n\n'
-      'جوايز وهدايا ومكافات كتير\n'
-      'واحتفالات وتكريمات للاولاد واولياء امورهم واعياد ميلادهم\n\n'
-      'فروعنا في كل مكان حواليك\n'
-      'تقدر تتواصل معانا وتحجز اول تمرينة مجانا';
-
-  // عدد صور معرض "نبذة عن الأكاديمية" (assets/images/about/about_01.jpg ... about_22.jpg)
-  static const int aboutGalleryImageCount = 22;
 }

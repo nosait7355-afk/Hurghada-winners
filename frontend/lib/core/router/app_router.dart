@@ -50,7 +50,6 @@ import 'package:hurghada_winners/features/staff/presentation/screens/staff_list_
 import 'package:hurghada_winners/features/payroll/presentation/screens/payroll_list_screen.dart';
 import 'package:hurghada_winners/features/expenses/presentation/screens/expenses_list_screen.dart';
 import 'package:hurghada_winners/features/info/presentation/screens/branches_screen.dart';
-import 'package:hurghada_winners/features/info/presentation/screens/about_academy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +62,6 @@ class AppRoutes {
   static const String login = '/login';
   static const String registerAcademy = '/register-academy';
   static const String branches = '/branches';
-  static const String aboutAcademy = '/about-academy';
   static const String playerLogin = '/player-login';
   static const String playerJoinRequest = '/player-join-request';
   static const String playerPendingApproval = '/player/pending-approval';
@@ -140,7 +138,6 @@ class _RouterNotifier extends ChangeNotifier {
     AppRoutes.playerLogin,
     AppRoutes.playerJoinRequest,
     AppRoutes.branches,
-    AppRoutes.aboutAcademy,
   };
 
   String? _adminHome(UserEntity? user) {
@@ -279,10 +276,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.branches,
         builder: (context, state) => const BranchesScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.aboutAcademy,
-        builder: (context, state) => const AboutAcademyScreen(),
       ),
       // ملاحظة: مسارات /player/chat و /player/notifications قبل /player
       GoRoute(

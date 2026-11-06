@@ -122,7 +122,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/about/
     - assets/fonts/
 
   fonts:

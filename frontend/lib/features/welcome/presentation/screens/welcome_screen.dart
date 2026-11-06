@@ -1,4 +1,6 @@
 import 'package:hurghada_winners/core/constants/app_colors.dart';
+import 'package:hurghada_winners/core/constants/app_constants.dart';
+import 'package:hurghada_winners/features/whatsapp/utils/whatsapp_utils.dart';
 import 'package:hurghada_winners/core/router/app_router.dart';
 import 'package:hurghada_winners/core/widgets/info_link_button.dart';
 import 'package:hurghada_winners/core/widgets/install_app_button.dart';
@@ -14,6 +16,16 @@ import 'package:go_router/go_router.dart';
 /// تعمل بنفس الكود على Android / Windows / Flutter Web.
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+
+  /// يفتح واتساب الأكاديمية.
+  Future<void> _contactUs(BuildContext context) async {
+    final ok = await WhatsAppUtils.open(AppConstants.academyWhatsappNumber);
+    if (!ok && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('تعذّر فتح واتساب')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,29 +50,6 @@ class WelcomeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // زرّي "الفروع" و"نبذة عن الأكاديمية" — كل واحد يفتح شاشة
-                    // مستقلة بزر رجوع. موضوعين أعلى الشاشة عشان يكونوا أول
-                    // حاجة يشوفها الزائر قبل اختيار مسار الدخول.
-                    Row(
-                      children: [
-                        Expanded(
-                          child: InfoLinkButton(
-                            icon: Icons.location_on_outlined,
-                            label: 'الفروع',
-                            onTap: () => context.push(AppRoutes.branches),
-                          ),
-                        ),
-                        Gap(12.w),
-                        Expanded(
-                          child: InfoLinkButton(
-                            icon: Icons.info_outline,
-                            label: 'نبذة عن الأكاديمية',
-                            onTap: () => context.push(AppRoutes.aboutAcademy),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Gap(20.h),
                     // شعار التطبيق الرسمي داخل بطاقة بيضاء (الشعار يحمل الاسم
                     // بنفسه، فلا نكرّر كتابة Hurghada Winners تحته).
                     Container(
@@ -119,6 +108,28 @@ class WelcomeScreen extends StatelessWidget {
 
                     // يظهر على المتصفح فقط، ويختفي بعد التثبيت.
                     const InstallAppButton(),
+                    Gap(28.h),
+
+                    // زرّي "الفروع" و"تواصل معنا" في آخر الشاشة.
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InfoLinkButton(
+                            icon: Icons.location_on_outlined,
+                            label: 'الفروع',
+                            onTap: () => context.push(AppRoutes.branches),
+                          ),
+                        ),
+                        Gap(12.w),
+                        Expanded(
+                          child: InfoLinkButton(
+                            icon: Icons.chat_outlined,
+                            label: 'تواصل معنا',
+                            onTap: () => _contactUs(context),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
