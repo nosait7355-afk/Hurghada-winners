@@ -1,4 +1,8 @@
 {
+  "framework": null,
+  "installCommand": "echo skip",
+  "buildCommand": "echo skip",
+  "outputDirectory": "build/web",
   "rewrites": [
     {
       "source": "/(.*)",
