@@ -1,11 +1,11 @@
 {
-    "name": "My Coach",
-    "short_name": "My Coach",
+    "name": "Hurghada Winners",
+    "short_name": "Hurghada Winners",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#1CA9E8",
-    "theme_color": "#1CA9E8",
-    "description": "My Coach - Academy Management System",
+    "background_color": "#0B3A5C",
+    "theme_color": "#0B3A5C",
+    "description": "Hurghada Winners - Academy Management System",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

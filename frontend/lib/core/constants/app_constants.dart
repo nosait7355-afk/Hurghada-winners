@@ -20,7 +20,7 @@ class AppConstants {
 
   static const String baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: 'https://my-coach-backend.vercel.app/api/v1',
+    defaultValue: 'https://hurghada-winners.vercel.app/api/v1',
   );
 
   // Storage Keys
