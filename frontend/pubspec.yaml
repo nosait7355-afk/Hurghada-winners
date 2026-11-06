@@ -1,0 +1,140 @@
+name: hurghada_winners
+description: Hurghada Winners - نظام إدارة أكاديمية كرة السلة
+publish_to: "none"
+version: 1.2.4+22
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+  go_router: ^14.2.7
+
+  # Code Generation Annotations
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+
+  # Network
+  dio: ^5.7.0
+  pretty_dio_logger: ^1.4.0
+
+  # Storage
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.3.2
+
+  # Image
+  cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
+
+  # UI Utilities
+  flutter_screenutil: ^5.9.3
+  gap: ^3.0.1
+  shimmer: ^3.0.0
+
+  # Utils
+  intl: ^0.19.0
+  url_launcher: ^6.3.1
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  get_it: ^8.0.2
+  logger: ^2.4.0
+  fl_chart: ^0.69.0
+
+  # PDF Reports
+  pdf: ^3.11.1
+  printing: ^5.13.1
+  path_provider: ^2.1.4
+
+  # Excel Export
+  excel: ^4.0.3
+  share_plus: ^10.1.4
+
+  cupertino_icons: ^1.0.8
+  qr_flutter: ^4.1.0
+
+  # DOM bindings للويب — يستخدمها ماسح QR في المتصفح فقط (conditional import)،
+  # فلا تدخل بناء أندرويد. بديل dart:html المهجورة.
+  web: ^1.1.1
+  # Platform-channel QR scanner (native zxing). Chosen over mobile_scanner
+  # because it has a negligible Dart footprint — no jni / objective_c / FFI
+  # bindings — so it compiles within memory on low-RAM build machines.
+  # Android only; we guard usage behind Platform.isAndroid (Windows uses manual/USB).
+  barcode_scan2: ^4.5.0
+
+  # مشغّل يوتيوب داخل التطبيق — IFrame API الرسمي فوق WebView (الطريقة الوحيدة
+  # التي تسمح بها شروط يوتيوب). أندرويد/iOS فقط: لا يوجد webview_flutter لويندوز،
+  # فنحرس الاستخدام خلف Platform ونفتح الرابط خارجياً هناك. روابط Google Drive
+  # تُفتح خارجياً دائماً.
+  youtube_player_iframe: ^6.0.2
+
+  # قارئ QR بـ Dart خالص — احتياطي ماسح الويب على Safari وFirefox، فلا
+  # BarcodeDetector فيهما. Dart خالص يعني صفر تكلفة على بناء أندرويد (الذي
+  # يظل على barcode_scan2 الأصلي).
+  zxing2: ^0.2.4
+
+  # تصغير الصور الكبيرة تلقائياً تحت حد الخادم (2MB) قبل الرفع. Dart خالص
+  # ومثبّت أصلاً كاعتمادية لمكتبة pdf — لا كود أصلي إضافي على بناء أندرويد.
+  image: ^4.3.0
+
+# path_provider_foundation is the iOS/macOS implementation only. Versions ≥2.5
+# migrated to FFI and pull `objective_c`, which forces the experimental
+# native-assets build pipeline (a heavy concurrent compile that OOMs low-RAM
+# build machines). We only build Android + Windows, so we pin it to the last
+# Swift/plugin-channel version — zero functional impact, keeps builds light.
+dependency_overrides:
+  # path_provider_android ≥2.3.0 migrated to `jni` (huge generated bindings that
+  # OOM low-RAM build machines). 2.2.23 is the last platform-channel release.
+  path_provider_android: 2.2.23
+  path_provider_foundation: 2.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.12
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/images/logo2026.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#0B3A5C"
+  adaptive_icon_foreground: "assets/images/logo2026.png"
+  web:
+    generate: true
+    image_path: "assets/images/logo2026.png"
+    background_color: "#0B3A5C"
+    theme_color: "#0B3A5C"
+  windows:
+    generate: false
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/about/
+    - assets/fonts/
+
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+          weight: 800

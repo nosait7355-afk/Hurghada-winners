@@ -1,0 +1,34 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Flutter / Dart
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/build/
+frontend/*.iml
+frontend/hs_err_pid*.log
+frontend/android/.gradle/
+frontend/android/app/build/
+frontend/ios/Pods/
+frontend/ios/.symlinks/
+
+# Env / secrets
+.env
+.env.*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Release artifacts / local tooling / signing
+*.apk
+*.aab
+.claude/
+*.jks
+*.keystore
+key.properties
+

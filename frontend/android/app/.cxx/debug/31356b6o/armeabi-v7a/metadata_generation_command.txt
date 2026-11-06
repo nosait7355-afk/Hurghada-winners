@@ -1,0 +1,20 @@
+                        -HG:\program\flutter\packages\flutter_tools\gradle\src\main\scripts
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_SYSTEM_VERSION=24
+-DANDROID_PLATFORM=android-24
+-DANDROID_ABI=armeabi-v7a
+-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
+-DANDROID_NDK=G:\android_sdk\ndk\28.2.13676358
+-DCMAKE_ANDROID_NDK=G:\android_sdk\ndk\28.2.13676358
+-DCMAKE_TOOLCHAIN_FILE=G:\android_sdk\ndk\28.2.13676358\build\cmake\android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=G:\android_sdk\cmake\3.22.1\bin\ninja.exe
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=G:\app academy saas\my coach academy\frontend\android\app\build\intermediates\cxx\debug\31356b6o\obj\armeabi-v7a
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=G:\app academy saas\my coach academy\frontend\android\app\build\intermediates\cxx\debug\31356b6o\obj\armeabi-v7a
+-BG:\app academy saas\my coach academy\frontend\android\app\.cxx\debug\31356b6o\armeabi-v7a
+-GNinja
+-Wno-dev
+--no-warn-unused-cli
+-DCMAKE_BUILD_TYPE=debug
+                        Build command args: []
+                        Version: 2

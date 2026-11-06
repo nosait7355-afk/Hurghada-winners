@@ -1,0 +1,247 @@
+const express = require('express');
+const { body } = require('express-validator');
+const {
+  getPlayers,
+  getPlayersBirthdays,
+  searchPlayers,
+  getPlayerById,
+  createPlayer,
+  updatePlayer,
+  deletePlayer,
+  deletePlayerImage,
+  changeGroup,
+  listJoinRequests,
+  approveJoinRequest,
+  rejectJoinRequest,
+  deleteRejectedJoinRequest,
+} = require('../controllers/player.controller');
+const {
+  getPlayerAccount,
+  createPlayerAccount,
+  changePlayerPassword,
+  resetPlayerPassword,
+  togglePlayerAccount,
+  getAccountStats,
+} = require('../controllers/playerAccountAdmin.controller');
+const {
+  getShareInfo,
+  enableShare,
+  disableShare,
+  updateBio,
+} = require('../controllers/publicProfile.controller');
+const { protect, restrictTo } = require('../middleware/auth.middleware');
+const validate = require('../middleware/validate');
+const { uploadPlayerImage, uploadJoinRequestFiles } = require('../config/cloudinary');
+const validateUpload = require('../middleware/validateUpload');
+
+const router = express.Router();
+
+// All routes require authentication
+router.use(protect);
+
+// حارس اشتراك المنصة: يمنع الكتابة عند انتهاء/تعليق الاشتراك (لا يمسّ GET).
+
+// ─── Validators ──────────────────────────────────────────────────────────────
+
+const createValidators = [
+  body('fullName')
+    .notEmpty().withMessage('الاسم الكامل مطلوب')
+    .isLength({ min: 2, max: 150 }).withMessage('الاسم يجب أن يكون بين 2 و 150 حرف'),
+  body('birthDate')
+    .notEmpty().withMessage('تاريخ الميلاد مطلوب')
+    .isDate().withMessage('تاريخ الميلاد غير صحيح'),
+  body('parentName')
+    .notEmpty().withMessage('اسم ولي الأمر مطلوب')
+    .isLength({ min: 2, max: 100 }).withMessage('اسم ولي الأمر يجب أن يكون بين 2 و 100 حرف'),
+  body('parentRelationship')
+    .notEmpty().withMessage('صلة القرابة مطلوبة')
+    .isIn(['أب', 'أم', 'أخ', 'أخت', 'جد', 'جدة', 'عم', 'عمة', 'خال', 'خالة', 'وصي'])
+    .withMessage('صلة القرابة غير صحيحة'),
+  body('parentPhone')
+    .notEmpty().withMessage('رقم هاتف ولي الأمر مطلوب')
+    .matches(/^[0-9+\-\s()]{7,20}$/).withMessage('رقم الهاتف غير صحيح'),
+  body('playerPhone')
+    .optional({ checkFalsy: true })
+    .matches(/^[0-9+\-\s()]{7,20}$/).withMessage('رقم هاتف اللاعب غير صحيح'),
+  body('sport')
+    .optional({ checkFalsy: true })
+    .isLength({ max: 60 }).withMessage('اسم الرياضة غير صحيح'),
+  // المجموعة اختيارية على مستوى الشكل؛ المتحكّم يفرضها فقط إذا كانت الأكاديمية
+  // تملك مجموعات لرياضة اللاعب (أكاديمية بلا مجموعات → groupId=null مسموح).
+  body('groupId')
+    .optional({ checkFalsy: true })
+    .isMongoId().withMessage('معرّف المجموعة غير صحيح'),
+];
+
+const updateValidators = [
+  body('fullName')
+    .optional()
+    .isLength({ min: 2, max: 150 }).withMessage('الاسم يجب أن يكون بين 2 و 150 حرف'),
+  body('birthDate')
+    .optional()
+    .isDate().withMessage('تاريخ الميلاد غير صحيح'),
+  body('parentName')
+    .optional()
+    .isLength({ min: 2, max: 100 }).withMessage('اسم ولي الأمر يجب أن يكون بين 2 و 100 حرف'),
+  body('parentRelationship')
+    .optional()
+    .isIn(['أب', 'أم', 'أخ', 'أخت', 'جد', 'جدة', 'عم', 'عمة', 'خال', 'خالة', 'وصي'])
+    .withMessage('صلة القرابة غير صحيحة'),
+  body('parentPhone')
+    .optional()
+    .matches(/^[0-9+\-\s()]{7,20}$/).withMessage('رقم الهاتف غير صحيح'),
+  body('playerPhone')
+    .optional({ checkFalsy: true })
+    .matches(/^[0-9+\-\s()]{7,20}$/).withMessage('رقم هاتف اللاعب غير صحيح'),
+  body('sport')
+    .optional({ checkFalsy: true })
+    .isLength({ max: 60 }).withMessage('اسم الرياضة غير صحيح'),
+  body('groupId')
+    .optional({ checkFalsy: true })
+    .isMongoId().withMessage('معرّف المجموعة غير صحيح'),
+];
+
+const changeGroupValidators = [
+  body('groupId')
+    .notEmpty().withMessage('المجموعة مطلوبة')
+    .isMongoId().withMessage('معرّف المجموعة غير صحيح'),
+];
+
+const approveJoinRequestValidators = [
+  body('amount')
+    .notEmpty().withMessage('مبلغ الاشتراك مطلوب')
+    .isFloat({ min: 0 }).withMessage('مبلغ الاشتراك غير صحيح'),
+  body('startDate')
+    .notEmpty().withMessage('تاريخ بداية الاشتراك مطلوب')
+    .isDate().withMessage('تاريخ البداية غير صحيح'),
+  body('endDate')
+    .notEmpty().withMessage('تاريخ نهاية الاشتراك مطلوب')
+    .isDate().withMessage('تاريخ النهاية غير صحيح')
+    .custom((value, { req }) => new Date(value) > new Date(req.body.startDate))
+    .withMessage('تاريخ النهاية يجب أن يكون بعد تاريخ البداية'),
+  body('notes').optional({ checkFalsy: true }).isLength({ max: 500 }),
+];
+
+const rejectJoinRequestValidators = [
+  body('reason').optional({ checkFalsy: true }).isLength({ max: 500 }).withMessage('سبب الرفض طويل جداً'),
+];
+
+// ─── Routes ──────────────────────────────────────────────────────────────────
+
+// GET  /players
+router.get('/', getPlayers);
+
+// GET  /players/search?q=...   ← MUST be before /:id to avoid conflict
+router.get('/search', searchPlayers);
+
+// GET  /players/birthdays?month=8&academyId=...   ← MUST be before /:id to avoid conflict
+router.get('/birthdays', getPlayersBirthdays);
+
+// GET  /players/account-stats   ← MUST be before /:id to avoid conflict
+router.get('/account-stats', getAccountStats);
+
+// GET  /players/join-requests   ← MUST be before /:id to avoid conflict
+router.get('/join-requests', listJoinRequests);
+
+// GET  /players/:id
+router.get('/:id', getPlayerById);
+
+// ─── رابط مشاركة البروفايل العام + النبذة ────────────────────────────────────
+router.get('/:id/share', getShareInfo);
+router.post('/:id/share', enableShare);
+router.delete('/:id/share', disableShare);
+router.patch(
+  '/:id/bio',
+  [body('bio').isString().isLength({ max: 1000 }).withMessage('النبذة لا يمكن أن تتجاوز 1000 حرف')],
+  validate,
+  updateBio
+);
+
+// ─── Player account management (Player Portal) — إضافي بالكامل ──────────────
+
+// GET  /players/:id/account — حالة حساب اللاعب (بدون كلمة مرور)
+router.get('/:id/account', getPlayerAccount);
+
+// POST /players/:id/create-account — إنشاء حساب للاعب قائم
+router.post('/:id/create-account', createPlayerAccount);
+
+// PATCH /players/:id/password — تغيير كلمة المرور يدوياً
+router.patch(
+  '/:id/password',
+  [
+    body('password')
+      .isLength({ min: 6, max: 64 }).withMessage('كلمة المرور يجب أن تكون 6 أحرف على الأقل'),
+    body('confirmPassword')
+      .optional()
+      .custom((value, { req }) => value === req.body.password)
+      .withMessage('كلمتا المرور غير متطابقتين'),
+  ],
+  validate,
+  changePlayerPassword
+);
+
+// PATCH /players/:id/reset-password — توليد كلمة مرور عشوائية جديدة
+router.patch('/:id/reset-password', resetPlayerPassword);
+
+// PATCH /players/:id/toggle-account — تفعيل/تعطيل الحساب
+router.patch(
+  '/:id/toggle-account',
+  [body('isActive').isBoolean().withMessage('قيمة التفعيل غير صحيحة')],
+  validate,
+  togglePlayerAccount
+);
+
+// POST /players
+// صورة اللاعب + إيصال الدفع (كلاهما إجباري — يفرضه createPlayer). نفس multer
+// طلبات الانضمام: يوزّع الحقلين على مجلّدي الصور والإيصالات. validateUpload
+// يحذف المرفوع إن سقط التحقّق.
+router.post(
+  '/',
+  uploadJoinRequestFiles,
+  createValidators,
+  validateUpload,
+  createPlayer
+);
+
+// PUT  /players/:id
+router.put(
+  '/:id',
+  uploadPlayerImage.single('image'),
+  updateValidators,
+  validate,
+  updatePlayer
+);
+
+// DELETE /players/:id
+router.delete('/:id', deletePlayer);
+
+// DELETE /players/:id/image
+router.delete('/:id/image', deletePlayerImage);
+
+// PATCH /players/:id/change-group
+router.patch('/:id/change-group', changeGroupValidators, validate, changeGroup);
+
+// PATCH /players/:id/approve-join-request
+router.patch(
+  '/:id/approve-join-request',
+  approveJoinRequestValidators,
+  validate,
+  approveJoinRequest
+);
+
+// PATCH /players/:id/reject-join-request
+router.patch(
+  '/:id/reject-join-request',
+  rejectJoinRequestValidators,
+  validate,
+  rejectJoinRequest
+);
+
+// DELETE /players/:id/join-request — حذف نهائي لطلب مرفوض (لا يملكه المشرف المحدود).
+router.delete(
+  '/:id/join-request',
+  restrictTo('super_admin', 'academy_admin'),
+  deleteRejectedJoinRequest
+);
+
+module.exports = router;

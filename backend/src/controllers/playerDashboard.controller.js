@@ -1,0 +1,131 @@
+const Subscription = require('../models/subscription.model');
+const Attendance = require('../models/attendance.model');
+const Evaluation = require('../models/evaluation.model');
+const Notification = require('../models/notification.model');
+const Conversation = require('../models/conversation.model');
+const RenewalRequest = require('../models/renewalRequest.model');
+const { sendSuccess } = require('../utils/apiResponse');
+const { subscriptionStats, todayFor } = require('./attendance.controller');
+const { ensurePlayerAlerts } = require('../utils/playerAlerts');
+
+const daysBetween = (future) => {
+  if (!future) return 0;
+  const ms = new Date(future).getTime() - Date.now();
+  return ms <= 0 ? 0 : Math.ceil(ms / (1000 * 60 * 60 * 24));
+};
+
+// GET /api/v1/player/dashboard  (protectPlayer) — تجميع كل ما يحتاجه اللاعب.
+const getPlayerDashboard = async (req, res, next) => {
+  const player = req.player; // وثيقة اللاعب (من protectPlayer)
+  const playerId = player._id;
+  const academyId = player.academyId;
+
+  // تذكير الاشتراك والغياب المتكرر يُولَّدان عند الفتح، قبل عدّ غير المقروء.
+  await ensurePlayerAlerts(player, todayFor(req));
+
+  const [
+    latestSub,
+    attendanceRecords,
+    evaluations,
+    unreadNotifications,
+    conversation,
+    latestRenewal,
+  ] =
+    await Promise.all([
+      Subscription.findOne({ playerId }).sort({ endDate: -1 }),
+      Attendance.find({ playerId }).sort({ timestamp: -1 }).limit(60),
+      Evaluation.find({ playerId }).sort({ evaluationDate: -1 }).limit(10),
+      // نفس فلتر مركز الإشعارات: إشعارات الرسائل لها عدّاد المحادثة وحده،
+      // وإلا ظهر رقم على الجرس بلا إشعارات في القائمة.
+      Notification.countDocuments({
+        recipientType: 'player',
+        recipientId: playerId,
+        isRead: false,
+        type: { $ne: 'NEW_MESSAGE' },
+      }),
+      Conversation.findOne({ academyId, playerId }),
+      RenewalRequest.findOne({ playerId }).sort({ created_at: -1 }),
+    ]);
+
+  // آخر طلب تجديد — يحدد شكل بانر الاشتراك المنتهي عند اللاعب
+  // (قيد المراجعة / مرفوض مع السبب). طلب أقدم من آخر اشتراك لا يهمّ.
+  const renewalRequest =
+    latestRenewal &&
+    (!latestSub || latestRenewal.created_at > latestSub.created_at)
+      ? {
+          _id: latestRenewal._id.toString(),
+          status: latestRenewal.status,
+          rejectionReason: latestRenewal.rejectionReason || '',
+          created_at: latestRenewal.created_at,
+        }
+      : null;
+
+  // حضور/غياب اللاعب في اشتراكه الأخير (نفس حساب شاشة الإدارة).
+  const attStats = await subscriptionStats(player, latestSub, todayFor(req));
+
+  const subscription = latestSub
+    ? {
+        _id: latestSub._id.toString(),
+        startDate: latestSub.startDate,
+        endDate: latestSub.endDate,
+        amount: latestSub.amount,
+        isActive: new Date() <= latestSub.endDate,
+        daysRemaining: daysBetween(latestSub.endDate),
+      }
+    : null;
+
+  const latestEvaluation = evaluations[0]
+    ? {
+        average: evaluations[0].average,
+        evaluationDate: evaluations[0].evaluationDate,
+      }
+    : null;
+
+  return sendSuccess(res, {
+    message: 'تم جلب لوحة اللاعب بنجاح',
+    data: {
+      player: {
+        _id: playerId.toString(),
+        fullName: player.fullName,
+        playerCode: player.playerCode,
+        image_url: player.image_url || null,
+        sport: player.sport || null,
+      },
+      schedule: {
+        attendanceDays: player.attendanceDays || [],
+        sport: player.sport || null,
+      },
+      attendance: {
+        // على أساس الاشتراك (نفس قاعدة الحضور الإدارية) — لا آخر 60 سجلاً.
+        presentCount: latestSub ? attStats.present : attendanceRecords.length,
+        absentCount: latestSub ? attStats.absent : 0,
+        recent: attendanceRecords.slice(0, 30).map((a) => ({
+          date: a.date,
+          time: a.time,
+          status: a.status,
+        })),
+      },
+      subscription,
+      renewalRequest,
+      evaluations: evaluations.map((e) => ({
+        _id: e._id.toString(),
+        evaluationDate: e.evaluationDate,
+        fitness: e.fitness,
+        basicSkills: e.basicSkills,
+        attack: e.attack,
+        defense: e.defense,
+        commitment: e.commitment,
+        average: e.average,
+        notes: e.notes || '',
+      })),
+      latestEvaluation,
+      notifications: { unread: unreadNotifications },
+      chat: {
+        conversationId: conversation ? conversation._id.toString() : null,
+        unread: conversation ? conversation.unreadForPlayer : 0,
+      },
+    },
+  });
+};
+
+module.exports = { getPlayerDashboard };

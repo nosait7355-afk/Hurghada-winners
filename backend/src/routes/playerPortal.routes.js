@@ -1,0 +1,152 @@
+const express = require('express');
+const { body, param } = require('express-validator');
+const { getPlayerDashboard } = require('../controllers/playerDashboard.controller');
+const { getPlayerConversation, playerSendMessage } = require('../controllers/chat.controller');
+const {
+  getPlayerNotifications,
+  markPlayerNotificationRead,
+  markAllPlayerRead,
+  deletePlayerNotification,
+} = require('../controllers/notification.controller');
+const { updateMyPhoto, deleteMyPhoto } = require('../controllers/playerProfile.controller');
+const { getPlayerAlbum } = require('../controllers/academyAlbum.controller');
+const {
+  getMyVideos,
+  likeAsPlayer,
+  unlikeAsPlayer,
+  listCommentsAsPlayer,
+  addCommentAsPlayer,
+  removeCommentAsPlayer,
+} = require('../controllers/playerVideo.controller');
+const { getPlayerStore, createPlayerOrder } = require('../controllers/store.controller');
+const { getPlayerKit, createPlayerBooking } = require('../controllers/teamKit.controller');
+const { createPlayerRenewalRequest } = require('../controllers/renewalRequest.controller');
+const { enableMyShare } = require('../controllers/publicProfile.controller');
+const { getPlayerOffers } = require('../controllers/offer.controller');
+const { listPlayerTournaments, getPlayerTournament } = require('../controllers/tournament.controller');
+const { protectPlayer } = require('../middleware/protectPlayer');
+const { uploadPlayerImage, uploadKitReceipt } = require('../config/cloudinary');
+const { KIT_SIZES } = require('../utils/kitSizes');
+const validate = require('../middleware/validate');
+const validateUpload = require('../middleware/validateUpload');
+
+const router = express.Router();
+
+// كل مسارات بوابة اللاعب تتطلب توكن لاعب.
+router.use(protectPlayer);
+
+// GET /api/v1/player/dashboard
+router.get('/dashboard', getPlayerDashboard);
+
+// ── العروض والخصومات السارية لفرع اللاعب ──
+router.get('/offers', getPlayerOffers);
+
+// ── البطولات الظاهرة لفرع اللاعب (قراءة فقط) ──
+router.get('/tournaments', listPlayerTournaments);
+router.get('/tournaments/:id', getPlayerTournament);
+
+// ── رابط مشاركة صفحة اللاعب العامة (ينشئه إن لم يوجد) ──
+router.post('/share', enableMyShare);
+
+// ── صورة اللاعب الشخصية ──
+// يعيد استخدام نفس multer/Cloudinary الخاص بصور اللاعبين (حد 2MB مطبَّق هناك).
+router.put('/photo', uploadPlayerImage.single('image'), updateMyPhoto);
+router.delete('/photo', deleteMyPhoto);
+
+// ── ألبوم الأكاديمية (قراءة فقط — أكاديمية اللاعب حصراً) ──
+router.get('/album', getPlayerAlbum);
+
+// ── فيديوهات بروفايل اللاعب (قراءة + إعجاب + تعليق — فيديوهاته حصراً) ──
+// تضيفها الإدارة كروابط خارجية؛ اللاعب يشاهد ويتفاعل ولا يضيف.
+const videoIdParam = [param('id').isMongoId().withMessage('معرّف الفيديو غير صحيح')];
+
+router.get('/videos', getMyVideos);
+router.post('/videos/:id/like', videoIdParam, validate, likeAsPlayer);
+router.delete('/videos/:id/like', videoIdParam, validate, unlikeAsPlayer);
+router.get('/videos/:id/comments', videoIdParam, validate, listCommentsAsPlayer);
+router.post(
+  '/videos/:id/comments',
+  [
+    ...videoIdParam,
+    body('text').notEmpty().withMessage('نص التعليق مطلوب')
+      .isLength({ max: 1000 }).withMessage('التعليق لا يمكن أن يتجاوز 1000 حرف'),
+  ],
+  validate,
+  addCommentAsPlayer
+);
+router.delete(
+  '/videos/:id/comments/:commentId',
+  [
+    ...videoIdParam,
+    param('commentId').isMongoId().withMessage('معرّف التعليق غير صحيح'),
+  ],
+  validate,
+  removeCommentAsPlayer
+);
+
+// ── متجر الأكاديمية (قراءة + إنشاء طلب شراء — أكاديمية اللاعب حصراً) ──
+router.get('/store', getPlayerStore);
+router.post(
+  '/store/orders',
+  [body('productId').isMongoId().withMessage('معرّف المنتج غير صحيح')],
+  validate,
+  createPlayerOrder
+);
+
+// ── طقم الفريق (قراءة + إنشاء حجز — أكاديمية اللاعب حصراً) ──
+// الحجز multipart: صورة إيصال الدفع مطلوبة ليراجعها المدير قبل الموافقة
+// (حد 2MB مطبَّق في multer). validateUpload يحذف الصورة المرفوعة إن سقط
+// التحقّق، فلا تبقى صور يتيمة على Cloudinary.
+router.get('/team-kit', getPlayerKit);
+router.post(
+  '/team-kit/bookings',
+  uploadKitReceipt.single('receipt'),
+  [
+    body('size').isIn(KIT_SIZES).withMessage('المقاس غير صحيح'),
+  ],
+  validateUpload,
+  createPlayerBooking
+);
+
+// ── طلب تجديد الاشتراك (إيصال مطلوب — يراجعه السوبر أدمن) ──
+// نفس multer إيصالات طقم الفريق (مجلد receipts، حد 2MB).
+router.post(
+  '/renewal-requests',
+  uploadKitReceipt.single('receipt'),
+  [
+    body('note').optional()
+      .isLength({ max: 500 }).withMessage('الملاحظة لا يمكن أن تتجاوز 500 حرف'),
+  ],
+  validateUpload,
+  createPlayerRenewalRequest
+);
+
+// ── محادثة اللاعب مع أكاديميته (نص فقط) ──
+router.get('/chat', getPlayerConversation);
+router.post(
+  '/chat',
+  [
+    body('text').notEmpty().withMessage('نص الرسالة مطلوب')
+      .isLength({ max: 1000 }).withMessage('الرسالة لا يمكن أن تتجاوز 1000 حرف'),
+  ],
+  validate,
+  playerSendMessage
+);
+
+// ── إشعارات اللاعب ──
+router.get('/notifications', getPlayerNotifications);
+router.patch('/notifications/read-all', markAllPlayerRead);
+router.patch(
+  '/notifications/:id/read',
+  [param('id').isMongoId().withMessage('معرّف الإشعار غير صحيح')],
+  validate,
+  markPlayerNotificationRead
+);
+router.delete(
+  '/notifications/:id',
+  [param('id').isMongoId().withMessage('معرّف الإشعار غير صحيح')],
+  validate,
+  deletePlayerNotification
+);
+
+module.exports = router;

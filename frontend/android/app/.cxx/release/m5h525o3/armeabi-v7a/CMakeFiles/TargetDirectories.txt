@@ -1,0 +1,2 @@
+G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/armeabi-v7a/CMakeFiles/edit_cache.dir
+G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/armeabi-v7a/CMakeFiles/rebuild_cache.dir
