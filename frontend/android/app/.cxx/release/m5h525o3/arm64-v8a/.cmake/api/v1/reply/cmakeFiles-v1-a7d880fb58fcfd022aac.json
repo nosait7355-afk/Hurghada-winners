@@ -41,7 +41,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake"
+			"path" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -307,7 +307,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake"
+			"path" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -541,7 +541,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake"
+			"path" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -692,7 +692,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake"
+			"path" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -786,13 +786,13 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake"
+			"path" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "G:/app academy saas/my coach academy/frontend/android/app/.cxx/release/m5h525o3/x86_64",
+		"build" : "G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/arm64-v8a",
 		"source" : "G:/program/flutter/packages/flutter_tools/gradle/src/main/scripts"
 	},
 	"version" : 

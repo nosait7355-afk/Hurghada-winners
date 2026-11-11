@@ -1,1 +1,1 @@
-G:\app academy saas\my coach academy\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\armeabi-v7a
+G:\app academy saas\Hurghada winners\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\armeabi-v7a

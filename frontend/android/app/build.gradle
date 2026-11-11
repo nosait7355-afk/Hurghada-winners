@@ -12,7 +12,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.basketball.academy"
+    namespace "com.hurghadawinners.app"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

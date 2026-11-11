@@ -6,14 +6,14 @@
     [
       "G:\\android_sdk\\cmake\\3.22.1\\bin\\ninja.exe",
       "-C",
-      "G:\\app academy saas\\my coach academy\\frontend\\android\\app\\.cxx\\release\\m5h525o3\\arm64-v8a",
+      "G:\\app academy saas\\Hurghada winners\\frontend\\android\\app\\.cxx\\release\\m5h525o3\\arm64-v8a",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "G:\\android_sdk\\cmake\\3.22.1\\bin\\ninja.exe",
     "-C",
-    "G:\\app academy saas\\my coach academy\\frontend\\android\\app\\.cxx\\release\\m5h525o3\\arm64-v8a",
+    "G:\\app academy saas\\Hurghada winners\\frontend\\android\\app\\.cxx\\release\\m5h525o3\\arm64-v8a",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {},

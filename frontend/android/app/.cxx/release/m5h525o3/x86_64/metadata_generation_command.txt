@@ -9,9 +9,9 @@
 -DCMAKE_ANDROID_NDK=G:\android_sdk\ndk\28.2.13676358
 -DCMAKE_TOOLCHAIN_FILE=G:\android_sdk\ndk\28.2.13676358\build\cmake\android.toolchain.cmake
 -DCMAKE_MAKE_PROGRAM=G:\android_sdk\cmake\3.22.1\bin\ninja.exe
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=G:\app academy saas\my coach academy\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\x86_64
--DCMAKE_RUNTIME_OUTPUT_DIRECTORY=G:\app academy saas\my coach academy\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\x86_64
--BG:\app academy saas\my coach academy\frontend\android\app\.cxx\release\m5h525o3\x86_64
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=G:\app academy saas\Hurghada winners\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\x86_64
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=G:\app academy saas\Hurghada winners\frontend\android\app\build\intermediates\cxx\release\m5h525o3\obj\x86_64
+-BG:\app academy saas\Hurghada winners\frontend\android\app\.cxx\release\m5h525o3\x86_64
 -GNinja
 -Wno-dev
 --no-warn-unused-cli

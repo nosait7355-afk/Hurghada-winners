@@ -1,4 +1,4 @@
-package com.basketball.academy
+package com.hurghadawinners.app
 
 import io.flutter.embedding.android.FlutterActivity
 
