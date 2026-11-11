@@ -32,3 +32,9 @@ Thumbs.db
 *.keystore
 key.properties
 
+
+# Android build caches / machine-local
+frontend/android/app/.cxx/
+frontend/android/build/
+frontend/android/local.properties
+

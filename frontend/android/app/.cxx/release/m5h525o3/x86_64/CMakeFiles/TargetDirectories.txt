@@ -1,2 +1,0 @@
-G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/edit_cache.dir
-G:/app academy saas/Hurghada winners/frontend/android/app/.cxx/release/m5h525o3/x86_64/CMakeFiles/rebuild_cache.dir
