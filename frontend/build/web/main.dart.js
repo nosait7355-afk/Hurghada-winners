@@ -51079,7 +51079,7 @@ a2p(a){var s=0,r=A.l(t.H),q
 var $async$a2p=A.h(function(b,c){if(b===1)return A.i(c,r)
 for(;;)switch(s){case 0:q=A.cli(a)
 s=2
-return A.d(A.n9("+201062679402","\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064a\u0643\u0645\n\u0645\u062d\u062a\u0627\u062c \u0645\u0633\u0627\u0639\u062f\u0629 \u0645\u0646 \u0627\u0644\u062f\u0639\u0645 \u0627\u0644\u0641\u0646\u064a \u0641\u064a \u062a\u0637\u0628\u064a\u0642 \u0645\u0627\u064a \u0643\u0648\u062a\u0634.\n\n\u0627\u0644\u0645\u0634\u0643\u0644\u0629:\n...................."),$async$a2p)
+return A.d(A.n9("+201062679402","\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u064a\u0643\u0645\n\u0645\u062d\u062a\u0627\u062c \u0645\u0633\u0627\u0639\u062f\u0629 \u0645\u0646 \u0627\u0644\u062f\u0639\u0645 \u0627\u0644\u0641\u0646\u064a \u0641\u064a \u062a\u0637\u0628\u064a\u0642 Hurghada Winners.\n\n\u0627\u0644\u0645\u0634\u0643\u0644\u0629:\n...................."),$async$a2p)
 case 2:if(!c)if(q!=null)q.aB(B.a6g)
 return A.j(null,r)}})
 return A.k($async$a2p,r)},
@@ -156673,7 +156673,7 @@ g=A.a1(l,A.vK(e!=null&&e.length!==0?A.jm(new A.bEY(j),B.bQ,l,e,new A.bEZ(j),l):A
 f=A.au(l,l,k*0.022)
 e=k*0.03
 s=t.p
-r=A.b([A.n("\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 \u0645\u0627\u064a \u0643\u0648\u062a\u0634",1,l,l,l,A.C(l,l,B.t,l,l,l,l,l,l,l,l,e,l,l,B.aj,l,1.1,!0,l,l,l,l,l,l,l,l),l,l,l)],s)
+r=A.b([A.n("\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 Hurghada Winners",1,l,l,l,A.C(l,l,B.t,l,l,l,l,l,l,l,l,e,l,l,B.aj,l,1.1,!0,l,l,l,l,l,l,l,l),l,l,l)],s)
 q=m.d
 if(q.length!==0){p=k*0.014
 B.f.J(r,A.b([A.au(l,l,p),A.a1(l,l,B.w,B.t.aI(0.5),l,l,l,e,l,l,l,l,l,1.2),A.au(l,l,p),A.n(q,1,l,l,l,A.C(l,l,B.t.aI(0.95),l,l,l,l,l,l,l,l,k*0.024,l,l,B.P,l,1.1,!0,l,l,l,l,l,l,l,l),l,l,l)],s))}g=A.b([g,f,A.am(A.c9Z(B.am,A.DV(A.ae(r,B.u,B.q,B.a7,0,l),B.bO),B.mw),1),A.au(l,l,k*0.018)],s)
@@ -156726,7 +156726,7 @@ return A.aY(A.n("\u062a\u0639\u0630\u0651\u0631 \u062a\u0648\u0644\u064a\u062f Q
 $S:1217}
 A.aug.prototype={
 A(a){var s=null,r=A.b([B.em.aI(0.55),B.em.aI(0.9)],t.t_),q=this.c,p=q*0.045,o=t.p
-return A.a1(s,A.DV(A.ae(A.b([A.am(A.Q(A.b([A.n("\u0645\u062f\u064a\u0631 \u0627\u0644\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629",s,s,s,s,A.C(s,s,B.mP,s,s,s,s,s,s,s,s,q*0.015,s,s,B.a2,s,s,!0,s,s,s,s,s,s,s,s),s,s,s),A.n("\u062f\u0643\u062a\u0648\u0631 / \u0639\u0645\u0627\u062f \u0627\u0644\u0634\u0647\u0627\u0648\u064a",1,B.ay,s,s,A.C(s,s,B.ak,s,s,s,s,s,s,s,s,q*0.02,s,s,B.aj,s,s,!0,s,s,s,s,s,s,s,s),s,s,s)],o),B.dZ,B.q,B.a7,0,B.x),1)],o),B.u,B.q,B.r,0,s),B.bO),B.w,s,s,new A.ab(s,s,B.abs,s,s,new A.lr(B.fB,B.eC,B.dA,r,s,s),B.D),s,s,s,s,new A.x(p,0,p,0),s,s,s)}}
+return A.a1(s,A.DV(A.ae(A.b([A.am(A.Q(A.b([A.n("\u0645\u062f\u064a\u0631 \u0627\u0644\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629",s,s,s,s,A.C(s,s,B.mP,s,s,s,s,s,s,s,s,q*0.015,s,s,B.a2,s,s,!0,s,s,s,s,s,s,s,s),s,s,s),A.n("\u062f\u0643\u062a\u0648\u0631 / \u0645\u062d\u0645\u062f \u062e\u0645\u064a\u0633",1,B.ay,s,s,A.C(s,s,B.ak,s,s,s,s,s,s,s,s,q*0.02,s,s,B.aj,s,s,!0,s,s,s,s,s,s,s,s),s,s,s)],o),B.dZ,B.q,B.a7,0,B.x),1)],o),B.u,B.q,B.r,0,s),B.bO),B.w,s,s,new A.ab(s,s,B.abs,s,s,new A.lr(B.fB,B.eC,B.dA,r,s,s),B.D),s,s,s,s,new A.x(p,0,p,0),s,s,s)}}
 A.a2T.prototype={
 W(){return new A.a2U()}}
 A.a2U.prototype={
@@ -166712,7 +166712,7 @@ s=1
 break}m=n.d
 m=m.length!==0?m:"\u0627\u0644\u0644\u0627\u0639\u0628"
 s=3
-return A.d(A.n9(l,A.cbW("\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 \u0645\u0627\u064a \u0643\u0648\u062a\u0634",n.z,null,m)),$async$QU)
+return A.d(A.n9(l,A.cbW("\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 Hurghada Winners",n.z,null,m)),$async$QU)
 case 3:if(!c)o.aB(B.bHB)
 case 1:return A.j(q,r)}})
 return A.k($async$QU,r)},

@@ -74,7 +74,7 @@ class AppConstants {
   static const String supportWhatsappNumber = companyWhatsappNumber;
   static const String supportDefaultMessage =
       'السلام عليكم\n'
-      'محتاج مساعدة من الدعم الفني في تطبيق ماي كوتش.\n\n'
+      'محتاج مساعدة من الدعم الفني في تطبيق Hurghada Winners.\n\n'
       'المشكلة:\n'
       '....................';
   static const String contactDefaultMessage =

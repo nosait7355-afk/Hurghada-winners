@@ -101,7 +101,7 @@ class WhatsAppUtils {
   static String renewalReminderTemplate({
     required String playerName,
     String? parentName,
-    String academyName = 'أكاديمية ماي كوتش',
+    String academyName = 'أكاديمية Hurghada Winners',
     DateTime? endDate,
   }) {
     final greeting = (parentName == null || parentName.trim().isEmpty)
