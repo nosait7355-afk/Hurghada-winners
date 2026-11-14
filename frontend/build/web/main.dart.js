@@ -50930,7 +50930,7 @@ case 1:return A.j(q,r)}})
 return A.k($async$kG,r)},
 Tm(a){var s=0,r=A.l(t.H),q=1,p=[],o,n,m,l,k
 var $async$Tm=A.h(function(b,c){if(b===1){p.push(c)
-s=q}for(;;)switch(s){case 0:n=A.f6("https://nosait.com/privacy",0,null)
+s=q}for(;;)switch(s){case 0:n=A.f6("https://winners.nosait.com/privacy.html",0,null)
 m=!1
 q=3
 s=6
@@ -158282,7 +158282,7 @@ var $async$Qm=A.h(function(a,b){if(a===1)return A.i(b,r)
 for(;;)switch(s){case 0:n=p.e
 if(n==null)o=null
 else{n=n.a
-o=n!=null&&n.length!==0?"https://coach.nosait.com/#/p/"+n:null}if(o==null){s=1
+o=n!=null&&n.length!==0?"https://winners.nosait.com/#/p/"+n:null}if(o==null){s=1
 break}s=3
 return A.d(A.vL(new A.r8(o)),$async$Qm)
 case 3:if(p.c!=null)p.ajk("\u062a\u0645 \u0646\u0633\u062e \u0627\u0644\u0631\u0627\u0628\u0637")
@@ -158293,7 +158293,7 @@ var $async$Qn=A.h(function(a,b){if(a===1)return A.i(b,r)
 for(;;)switch(s){case 0:n=p.e
 if(n==null)o=null
 else{n=n.a
-o=n!=null&&n.length!==0?"https://coach.nosait.com/#/p/"+n:null}if(o==null){s=1
+o=n!=null&&n.length!==0?"https://winners.nosait.com/#/p/"+n:null}if(o==null){s=1
 break}s=3
 return A.d(A.Pj("\u0628\u0631\u0648\u0641\u0627\u064a\u0644 \u0627\u0644\u0644\u0627\u0639\u0628 "+p.a.d+"\n"+o,null),$async$Qn)
 case 3:case 1:return A.j(q,r)}})
@@ -158315,7 +158315,7 @@ else{if(o!=null){l=o.a
 l=l!=null&&l.length!==0}else l=!1
 if(l){m=A.H(10)
 l=o.a
-l=l!=null&&l.length!==0?"https://coach.nosait.com/#/p/"+l:p
+l=l!=null&&l.length!==0?"https://winners.nosait.com/#/p/"+l:p
 l.toString
 m=A.a1(p,A.a0j(l,B.iY,B.aN),B.w,p,p,new A.ab(B.bR,p,p,m,p,p,B.D),p,p,p,p,B.xt,p,p,p)
 l=q.f
@@ -158518,7 +158518,7 @@ for(;;)switch(s){case 0:o=t.P
 s=3
 return A.d(p.a.E_("/player/share",o),$async$Vd)
 case 3:n=b.a
-q="https://coach.nosait.com/#/p/"+A.aE(J.w(o.a(J.w(n==null?o.a(n):n,"data")),"token"))
+q="https://winners.nosait.com/#/p/"+A.aE(J.w(o.a(J.w(n==null?o.a(n):n,"data")),"token"))
 s=1
 break
 case 1:return A.j(q,r)}})

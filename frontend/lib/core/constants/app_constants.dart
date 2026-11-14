@@ -54,15 +54,15 @@ class AppConstants {
 
   // Privacy Policy — official link opened in the device's default browser.
   // Change this value to update the link without touching any other code.
-  static const String privacyPolicyUrl = 'https://hurghawinners-front.vercel.app/privacy.html';
+  static const String privacyPolicyUrl = 'https://winners.nosait.com/privacy.html';
 
   // معرّف خاص يُمرَّر مكان academyId في مسارات اللاعبين/الاشتراكات ليعني
   // "كل الفروع" — للسوبر أدمن فقط، والباك إند يتحقق من الدور.
   static const String allAcademiesId = 'all';
 
   // عنوان نسخة الويب — تُبنى عليه روابط مشاركة بروفايل اللاعب
-  // (hash routing: https://coach.nosait.com/#/p/<token>).
-  static const String publicWebBaseUrl = 'https://coach.nosait.com';
+  // (hash routing: https://winners.nosait.com/#/p/<token>).
+  static const String publicWebBaseUrl = 'https://winners.nosait.com';
 
   // Company contact (WhatsApp) for "create account / inquiry".
   static const String companyWhatsappNumber = '+201062679402';

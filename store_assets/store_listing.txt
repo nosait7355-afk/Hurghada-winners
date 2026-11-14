@@ -1,0 +1,54 @@
+===== اسم التطبيق (30 حرف بحد أقصى) =====
+Hurghada Winners
+
+===== الوصف المختصر - عربي (80 حرف بحد أقصى) =====
+تطبيق أكاديمية Hurghada Winners للتنس: الحضور والاشتراكات ومتابعة اللاعبين
+
+===== Short description - English (max 80) =====
+Hurghada Winners Tennis Academy: attendance, subscriptions and player progress
+
+===== الوصف الكامل - عربي =====
+تطبيق Hurghada Winners هو التطبيق الرسمي لأكاديمية Hurghada Winners للتنس في الغردقة، بفروعها في نادي الغردقة الرياضي وفندق سندباد وفندق الكونتينتال ومدرسة رجاك.
+
+للاعبين وأولياء الأمور:
+• تابع حضور اللاعب وتقييماته أول بأول
+• اعرف موعد تجديد الاشتراك وابعت إيصال الدفع من التطبيق
+• بطاقة لاعب خاصة بكود حضور
+• شوف الصور والفيديوهات والمباريات والبطولات
+• قدّم طلب انضمام لاعب جديد واختار الفرع المناسب
+• تواصل مع الأكاديمية على واتساب بضغطة واحدة
+
+لإدارة الأكاديمية والمدربين:
+• تسجيل الحضور بمسح كود اللاعب بالكاميرا
+• إدارة اللاعبين والمجموعات والفروع
+• متابعة الاشتراكات والتجديدات والمدفوعات
+• تذكيرات واتساب جاهزة للغياب والتجديد وأعياد الميلاد
+• تقارير PDF وExcel للحضور والاشتراكات
+• تنظيم المباريات والبطولات
+
+بياناتك محمية ولا تُستخدم إلا داخل الأكاديمية.
+
+===== Full description - English =====
+Hurghada Winners is the official app of Hurghada Winners Tennis Academy in Hurghada, with branches at Hurghada Sporting Club, Sindbad Hotel, Continental Hotel and Rajac School.
+
+For players and parents:
+• Follow attendance and coach evaluations
+• See subscription renewal dates and send payment receipts from the app
+• Personal player card with an attendance code
+• Photos, videos, matches and tournaments
+• Request to join a branch as a new player
+• Contact the academy on WhatsApp in one tap
+
+For academy staff and coaches:
+• Take attendance by scanning the player's code
+• Manage players, groups and branches
+• Track subscriptions, renewals and payments
+• Ready WhatsApp reminders for absence, renewal and birthdays
+• PDF and Excel reports
+• Organize matches and tournaments
+
+Your data is protected and used only within the academy.
+
+===== روابط =====
+Privacy policy: https://winners.nosait.com/privacy.html
+Account deletion: https://winners.nosait.com/delete-account.html
