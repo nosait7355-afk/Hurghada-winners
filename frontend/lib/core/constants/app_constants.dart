@@ -54,7 +54,7 @@ class AppConstants {
 
   // Privacy Policy — official link opened in the device's default browser.
   // Change this value to update the link without touching any other code.
-  static const String privacyPolicyUrl = 'https://nosait.com/privacy';
+  static const String privacyPolicyUrl = 'https://hurghawinners-front.vercel.app/privacy.html';
 
   // معرّف خاص يُمرَّر مكان academyId في مسارات اللاعبين/الاشتراكات ليعني
   // "كل الفروع" — للسوبر أدمن فقط، والباك إند يتحقق من الدور.
